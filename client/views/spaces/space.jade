@@ -1,0 +1,47 @@
+template(name="space")
+    with space
+        .page-header.position-relative
+            h1.inline
+                a(href="{{pathFor 'buildingSpaces' _id=building_id}}") #{../building.name}
+                small
+                    i.ace-icon.fa.fa-angle-double-right
+                    | #{name}
+            a.btn.btn-info.pull-right(id="newSpaceButton")
+                i.ace-icon.fa.fa-plus
+                | New space
+        .clearfix
+        .profile-user-info.profile-user-info-striped
+            .profile-info-row
+                .profile-info-name Current Tenant
+                .profile-info-value
+                    with ../current_tenant
+                        p(style='white-space:pre;')
+                            |Nom: #{firstname} #{lastname}
+                            |Email: #{email}
+                            | Tel: #{phone}
+                            | exit: {{fromNow exit_date}}
+            .profile-info-row
+                .profile-info-name Rent
+                .profile-info-value
+
+            .profile-info-row
+                .profile-info-name Furnished
+                .profile-info-value
+            .profile-info-row
+                .profile-info-name Creation time
+                .profile-info-value added #{created_on}
+        .space-12
+        .row
+            .col-xs-12
+                .tabbable
+                    ul.nav.nav-tabs
+                        li#menu-spaces(class="{{isActive 'buildingSpaceTenants'}}")
+                            a(href="{{pathFor 'buildingSpaceTenants' _building_id=building_id _id=_id}}") #{nbr_spaces} Tenants
+                        li#menu-dashboards(class="{{isActive 'buildingSpaceTransactions'}}")
+                            a(href="{{pathFor 'buildingSpaceTransactions' _building_id=building_id _id=_id}}") Transactions
+                    .tab-content
+                        +yield "subTemplate"
+        +with ..
+            +newTenant
+
+

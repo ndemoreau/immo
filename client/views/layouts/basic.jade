@@ -1,0 +1,28 @@
+template(name="basicLayout")
+    +header
+    #main-container.main-container
+        #sidebar.sidebar.sidebar-fixed.responsive
+            #sidebar-shortcuts.sidebar-shortcuts
+            ul(class="nav nav-list")
+                li
+                    a(href="{{pathFor 'buildings'}}")
+                        i(class="menu-icon glyphicon glyphicon-home")
+                        span.menu-text Buildings
+                li
+                    a(href="{{pathFor 'spaces'}}")
+                        i(class="menu-icon glyphicon glyphicon-bell")
+                        span.menu-text Spaces
+                li
+                    a(href="{{pathFor 'doctypes'}}")
+                        i(class="menu-icon glyphicon glyphicon-file")
+                        span.menu-text Document templates
+
+    .sidebar-toggle.sidebar-collapse
+        .main-content
+            +breadcrumb
+            .page-content
+                +notifications
+                +yield
+                | {{! Also a sidebar! }}
+    +footer
+    +yield "modal"

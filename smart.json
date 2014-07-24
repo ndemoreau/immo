@@ -1,0 +1,20 @@
+{
+  "packages": {
+    "animate-css": {},
+    "blaze-layout": {},
+    "subs-manager": {},
+    "jade": {},
+    "handlebar-helpers": {},
+    "collection-helpers": {},
+    "notifications": {},
+    "accounts-ui-bootstrap-3": {},
+    "bootstrap3-less": {},
+    "font-awesome": {},
+    "autoform": {},
+    "x-editable-bootstrap3": {},
+    "bootstrap3-datepicker": {},
+    "bootstrap3-wysihtml5": {},
+    "collectionFS": {},
+    "cfs-s3": {}
+  }
+}
