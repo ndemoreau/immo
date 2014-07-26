@@ -6,14 +6,18 @@ template(name="tenants")
         h1 {{total}} Tenants
     .clearfix
     +tenantsList
+
 template(name="spaceTenants")
-    .animated.fadeIn
-        .page-header.position-relative
-            a.btn.btn-info.btn-sm#newTenantButton
-                i.ace-icon.fa.fa-plus
-                | New tenant
-        .clearfix
-    +tenantsList
+    #tenantsList
+        .animated.fadeIn
+            .page-header.position-relative
+                a.btn.btn-info.btn-sm#newTenantButton
+                    i.ace-icon.fa.fa-plus
+                    | New tenant
+            .clearfix
+            +tenantsList
+    +newTenant
+
 template(name="tenantsList")
     .widgets
         .row
@@ -22,7 +26,7 @@ template(name="tenantsList")
                     .widget-box.widget-color-purple
                         .widget-header
                             h4
-                                a(href="/buildings/#{building_id}/spaces/#{space_id}/tenants/#{_id}") #{firstname} #{lastname}
+                                a(href="/buildings/#{building_id}/spaces/#{space_id}/tenants/#{_id}") #{fullname}
                         .widget-body
                             p Exit date {{fromNow exit_date}}
                             p building: #{building_id} space: #{space_id} tenant: #{_id}

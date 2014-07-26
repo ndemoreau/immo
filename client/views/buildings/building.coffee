@@ -1,5 +1,4 @@
 Template.building.rendered = ->
-  console.log this
 
 
 Template.building.events

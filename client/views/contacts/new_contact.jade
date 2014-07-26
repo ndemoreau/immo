@@ -1,0 +1,21 @@
+template(name="newContact")
+    #newContact.modal.fade
+        .modal-dialog
+            .modal-content
+                .modal-header
+                    button(type="button" class="close" data-dismiss="modal" aria-hidden="true") &times;
+                    h4(class="modal-title" id="myModalLabel") Add a new contact
+                .modal-body
+                    +autoForm(collection="Contacts" id="insertContactForm" type="insert" validation="blur")
+                        fieldset
+                            +afQuickField name="firstname"
+                            +afQuickField name="lastname"
+                            +afQuickField name="email"
+                            +afQuickField name="address"
+                            +afQuickField name="zip"
+                            +afQuickField name="city"
+                            +afQuickField name="birthday" class="datepicker"
+                        button(type="submit" id="createContact" class="btn btn-default") Submit
+
+
+

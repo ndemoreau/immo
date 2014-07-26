@@ -5,109 +5,78 @@
 # All code related to the Tenants collection goes here. 
 #
 # /+ ---------------------------------------------------- 
-@Tenants = new Meteor.Collection("tenants",
-  schema:
-    space_id:
-      type: String
-      label: "Space"
-      max: 50
 
-    firstname:
-      type: String
-      label: "First Name"
-      optional: true
-      max: 50
 
-    lastname:
-      type: String
-      label: "Last Name"
-      optional: true
-      max: 50
+Schemas.Tenant = new SimpleSchema
+  space_id:
+    type: String
+    label: "Space"
+    max: 50
 
-    address:
-      type: String
-      label: "Address"
-      max: 50
+  contact_id:
+    type: String
+    label: "Name"
+    optional: true
+    max: 50
+    autoValue: ->
+      console.log "autovalue contact_id"
 
-    address2:
-      type: String
-      label: "Address 2"
-      max: 50
-      optional: true
+  entry_date:
+    type: Date
+    label: "Entry date"
+    optional: true
+    max: 50
 
-    email:
-      type: String
-      label: "E-mail"
-      regEx: SimpleSchema.RegEx.Email
-      optional: false
-      max: 50
-
-    phone:
-      type: String
-      label: "Phone"
-      optional: true
-      max: 50
-
-    zip:
-      type: String
-      label: "Zip code"
-      optional: true
-      regEx: /^[0-9]{4,5}$/
-      max: 50
-
-    city:
-      type: String
-      label: "City"
-      optional: true
-      max: 50
-
-    country:
-      type: String
-      label: "Country"
-      optional: true
-      max: 50
-
-    entry_date:
-      type: Date
-      label: "Entry date"
-      optional: true
-      max: 50
-
-    exit_date:
-      type: Date
-      label: "Exit date"
-      optional: true
-      max: 50
+  exit_date:
+    type: Date
+    label: "Exit date"
+    optional: true
+    max: 50
 #      autoValue: () ->
 #        this.field("entry_date")
 
-    rent:
-      type: Number
-      label: "Rent by month"
-      optional: true
+  rent:
+    type: Number
+    label: "Rent by month"
+    optional: true
 
-    costs:
-      type: Number
-      label: "Costs by month"
-      optional: true
 
-    contract_type:
-      type: String
-      label: "Type of contract"
-      allowedValues: ["Not furnished", "Furnished"]
-      optional: true
-      max: 50
+  costs:
+    type: Number
+    label: "Costs by month"
+    optional: true
+    defaultValue: ->
+      if @space_id
+        space = Spaces.findOne(@space_id)
+        space.rent
+      else
+        1000
+  contract_type:
+    type: String
+    label: "Type of contract"
+    allowedValues: ["Not furnished", "Furnished"]
+    optional: true
+    max: 50
 
-    contract_duration:
-      type: Number
-      label: "contract duration in months"
-      optional: true
+  contract_duration:
+    type: Number
+    label: "contract duration in months"
+    optional: true
 
-    creation_date:
-      type: Date
-      label: "Creation date"
-      defaultValue: new Date()
-)
+  creation_date:
+    type: Date
+    label: "Creation date"
+    defaultValue: new Date()
+
+
+
+
+
+
+@Tenants = new Meteor.Collection "tenants"
+
+Tenants.attachSchema(Schemas.Tenant)
+
 
 #Tenants.simpleSchema().messages({
 #    "regEx zip": "Your Zip Code can only be numeric and should have 5 characters!",
@@ -126,8 +95,11 @@ Tenants.allow
 
 Tenants.helpers
   fullname: ->
-    participant = Participants.findOne(@participant_id)
-    participant.firstname + " " + participant.lastname
+    unless @contact_id
+      @firstname + " " + @lastname
+    else
+      contact = Contacts.findOne(@contact_id)
+      contact.firstname + " " + contact.lastname
 
   subscription_date: ->
     moment(Date(@creation_date)).format "DD MMMM"

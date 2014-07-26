@@ -31,3 +31,6 @@ collectionFS
 cfs-filesystem
 cfs-s3
 insecure
+jquery-csv
+collection-hooks
+xwidgets

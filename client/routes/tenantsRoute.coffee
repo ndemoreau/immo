@@ -28,13 +28,13 @@ Router.map ->
     waitOn: ->
       [subs.subscribe("allSpaces"),
        subs.subscribe "allBuildings",
-         subs.subscribe "allTenants"
+       subs.subscribe "allTenants",
+       subs.subscribe "allContacts"
       ]
 
     data: ->
       building: Buildings.findOne(@params._building_id)
       space: Spaces.findOne(@params._id)
-      tenants: Tenants.find({space_id: @params._id})
       building_spaces: Spaces.find({building_id: @params._building_id})
       current_tenant: Tenants.findOne({space_id: @params._id}, {sort: {"entry_date": -1}, limit : 1})
 
@@ -77,3 +77,7 @@ Router.map ->
       tenants: Tenants.find({space_id: @params._id})
       building_spaces: Spaces.find({building_id: @params._building_id})
       current_tenant: Tenants.findOne({space_id: @params._id}, {sort: {"entry_date": -1}, limit : 1})
+
+  @route "xwidgets",
+    path: "/xwidgets"
+    template:"form"

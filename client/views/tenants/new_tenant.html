@@ -1,0 +1,12 @@
+<template name='newTenant2'>
+    {{#autoForm collection="Tenants" id="insertTenantForm" type="insert" validation="blur"}}
+    <fieldset>
+        <legend>Form</legend>
+        {{> afFieldInput name="contact_id" references="contacts.lastname" call="Contacts" template="tags"}}
+    </fieldset>
+    <button type="submit" class="btn btn-primary">Save</button>
+    {{/autoForm}}
+    {{#each contacts}}
+    <div class=editable _id={{_id}}>{{_id}}</div>
+    {{/each}}
+</template>

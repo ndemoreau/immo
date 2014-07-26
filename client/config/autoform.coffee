@@ -28,6 +28,8 @@ AutoForm.hooks
           Notifications.success 'New tenant created: ' + tenant.firstname + " " + tenant.lastname
         else
           Notifications.alert error
+        $("#newTenant").addClass("hidden")
+        $("#tenantsList").removeClass("hidden")
 
   insertDoctypeForm:
     after:
@@ -46,6 +48,25 @@ AutoForm.hooks
         else
           Notifications.alert error
         Router.go("doctypes")
+
+
+  insertContactForm:
+    after:
+      insert: (error, result, template) ->
+        unless result is false
+          contact = Contacts.findOne(result)
+          if Router.current().route.name == "buildingSpaceTenants"
+            $("#contact_id").val(contact._id)
+          Notifications.success 'New Contact created: ' + contact.lastname
+        else
+          Notifications.alert error
+        $('#newContact').modal('hide')
+      update: (error, result, template) ->
+        unless result is false
+          contact = Contacts.findOne(Router.current().params._id)
+          Notifications.success 'Contact updated: ' + contact.lastname
+        else
+          Notifications.alert error
 
 
 Meteor.startup ->

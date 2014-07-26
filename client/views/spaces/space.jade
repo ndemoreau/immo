@@ -5,7 +5,7 @@ template(name="space")
                 a(href="{{pathFor 'buildingSpaces' _id=building_id}}") #{../building.name}
                 small
                     i.ace-icon.fa.fa-angle-double-right
-                    | #{name}
+                    div(id="text" class="editable" data-type="text" data-pk="#{_id}" data-name="name" data-value="#{name}" data-context="Spaces") #{name}
             a.btn.btn-info.pull-right(id="newSpaceButton")
                 i.ace-icon.fa.fa-plus
                 | New space
@@ -23,10 +23,16 @@ template(name="space")
             .profile-info-row
                 .profile-info-name Rent
                 .profile-info-value
+                    div(id="text" class="editable" data-type="text" data-pk="#{_id}" data-name="rent" data-value="#{rent}" data-context="Spaces") #{rent}
 
             .profile-info-row
-                .profile-info-name Furnished
+                .profile-info-name Charges
                 .profile-info-value
+                    div(id="text" class="editable" data-type="text" data-pk="#{_id}" data-name="charges" data-value="#{charges}" data-context="Spaces") #{charges}
+            .profile-info-row
+                .profile-info-name Contract Type
+                .profile-info-value
+                    div(id="text" class="editable" data-type="select" data-pk="#{_id}" data-name="contract_type" data-value="#{contract_type}" data-source="{'Furnished': 'Furnished', 'Not Furnished': 'Not Furnished'}" data-context="Spaces") #{contract_type}
             .profile-info-row
                 .profile-info-name Creation time
                 .profile-info-value added #{created_on}
@@ -41,7 +47,5 @@ template(name="space")
                             a(href="{{pathFor 'buildingSpaceTransactions' _building_id=building_id _id=_id}}") Transactions
                     .tab-content
                         +yield "subTemplate"
-        +with ..
-            +newTenant
 
 

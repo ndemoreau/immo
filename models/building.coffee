@@ -1,46 +1,48 @@
-@Buildings = new Meteor.Collection("buildings",
-    schema:
-      name:
-        type: String
-        label: "Name"
-        max: 50
+Schemas.Building = new SimpleSchema
+  name:
+    type: String
+    label: "Name"
+    max: 50
 
-      address:
-        type: String
-        label: "Address"
-        max: 50
+  address:
+    type: String
+    label: "Address"
+    max: 50
 
-      address2:
-        type: String
-        label: "Address 2"
-        max: 50
-        optional: true
+  address2:
+    type: String
+    label: "Address 2"
+    max: 50
+    optional: true
 
-      zip:
-        type: String
-        label: "Zip code"
-        optional: true
-        regEx: /^[0-9]{5}$/
-        max: 50
+  zip:
+    type: String
+    label: "Zip code"
+    optional: true
+    regEx: /^[0-9]{5}$/
+    max: 50
 
-      city:
-        type: String
-        label: "City"
-        optional: true
-        max: 50
+  city:
+    type: String
+    label: "City"
+    optional: true
+    max: 50
 
-      nbr_spaces:
-        type: Number
-        label: "number spaces"
-        optional: true
+  nbr_spaces:
+    type: Number
+    label: "number spaces"
+    optional: true
 
 
-      creation_date:
-        type: Date
-        label: "Creation date"
-        defaultValue: new Date()
+  creation_date:
+    type: Date
+    label: "Creation date"
+    defaultValue: new Date()
 
-  )
+
+@Buildings = new Meteor.Collection "buildings"
+
+Buildings.attachSchema(Schemas.Building)
 
 Buildings.simpleSchema().messages
   "regEx zip": "Your Zip Code can only be numeric and should have 5 characters!",

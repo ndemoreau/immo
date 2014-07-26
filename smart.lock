@@ -17,7 +17,10 @@
       "bootstrap3-datepicker": {},
       "bootstrap3-wysihtml5": {},
       "collectionFS": {},
-      "cfs-s3": {}
+      "cfs-s3": {},
+      "jquery-csv": {},
+      "collection-hooks": {},
+      "xwidgets": {}
     },
     "packages": {
       "animate-css": {
@@ -72,8 +75,8 @@
       },
       "autoform": {
         "git": "https://github.com/aldeed/meteor-autoform.git",
-        "tag": "v0.15.2",
-        "commit": "112f2bc5e4961929cffcc671d5435cdc12974311"
+        "tag": "v0.16.0",
+        "commit": "c53ee673cfbb0aa5388e54b3ad931367fcbc9f41"
       },
       "x-editable-bootstrap3": {
         "git": "https://github.com/JustinSGray/meteor-x-editable-bootstrap.git",
@@ -99,6 +102,21 @@
         "git": "https://github.com/CollectionFS/Meteor-cfs-s3.git",
         "tag": "v0.0.29",
         "commit": "97d3c544165c766115f2b91a6aaca54a7438a558"
+      },
+      "jquery-csv": {
+        "git": "https://github.com/donskifarrell/meteor-jquery-csv.git",
+        "tag": "v0.7.1",
+        "commit": "7a7d868dd85da5d64dc4a174a3e5d5e2bbf90c03"
+      },
+      "collection-hooks": {
+        "git": "https://github.com/matb33/meteor-collection-hooks.git",
+        "tag": "v0.7.2",
+        "commit": "261f61f07b371ae913463fba8964a9b93cab531b"
+      },
+      "xwidgets": {
+        "git": "https://github.com/miguelalarcos/xwidgets.git",
+        "tag": "v0.1.0",
+        "commit": "b0f17192371e37e0da883ac4bfdd5faa9d7fda26"
       },
       "simple-schema": {
         "git": "https://github.com/aldeed/meteor-simple-schema.git",

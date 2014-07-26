@@ -15,6 +15,9 @@
     "bootstrap3-datepicker": {},
     "bootstrap3-wysihtml5": {},
     "collectionFS": {},
-    "cfs-s3": {}
+    "cfs-s3": {},
+    "jquery-csv": {},
+    "collection-hooks": {},
+    "xwidgets": {}
   }
 }

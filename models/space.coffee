@@ -19,6 +19,29 @@
       optional: true
       max: 50
 
+    rent:
+      type: Number
+      label: "Rent"
+      optional: true
+
+    charges:
+      type: Number
+      label: "Charges"
+      optional: true
+
+    contract_type:
+      type: String
+      label: "Contract type"
+      optional: true
+      allowedValues: ["Not furnished", "Furnished"]
+
+
+    name:
+      type: String
+      label: "Name"
+      optional: true
+      max: 50
+
     creation_date:
       type: Date
       label: "Creation date"
