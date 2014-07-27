@@ -1,7 +1,7 @@
 BuildingController = RouteController.extend(template: "buildings")
 Router.map ->
   @route "buildings",
-    path: "/buildings"
+    path: "/"
     waitOn: ->
       subs.subscribe "allBuildings"
 
