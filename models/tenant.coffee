@@ -2,9 +2,9 @@
 #
 # ## Tenants ##
 #
-# All code related to the Tenants collection goes here. 
+# All code related to the Tenants collection goes here.
 #
-# /+ ---------------------------------------------------- 
+# /+ ----------------------------------------------------
 
 
 Schemas.Tenant = new SimpleSchema
@@ -41,9 +41,9 @@ Schemas.Tenant = new SimpleSchema
     optional: true
 
 
-  costs:
+  charges:
     type: Number
-    label: "Costs by month"
+    label: "Charges by month"
     optional: true
     defaultValue: ->
       if @space_id

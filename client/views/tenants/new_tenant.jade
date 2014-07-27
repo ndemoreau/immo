@@ -5,9 +5,9 @@ template(name="newTenant")
                 .space-12
                 +autoForm(collection="Tenants" id="insertTenantForm" type="insert")
                     fieldset
-                        +afFieldInput(name="contact_id" references="Contacts.lastname" call="contacts" template="tags")
+                        +afFieldInput(name="contact_id" references="Contacts.lastname" call="Contacts" template="tags")
                         +afQuickField name="rent"
-                        +afQuickField name="costs"
+                        +afQuickField name="charges"
                         +afQuickField name="entry_date" class="datepicker duration"
                         +afQuickField name="contract_duration" class="duration"
                         +afQuickField name="exit_date" class="datepicker"

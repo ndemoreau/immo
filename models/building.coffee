@@ -19,7 +19,7 @@ Schemas.Building = new SimpleSchema
     type: String
     label: "Zip code"
     optional: true
-    regEx: /^[0-9]{5}$/
+    regEx: /^[0-9]{4,5}$/
     max: 50
 
   city:

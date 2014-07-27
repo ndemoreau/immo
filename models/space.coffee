@@ -12,7 +12,6 @@
       label: "Building"
       max: 50
 
-
     name:
       type: String
       label: "Name"
@@ -34,13 +33,6 @@
       label: "Contract type"
       optional: true
       allowedValues: ["Not furnished", "Furnished"]
-
-
-    name:
-      type: String
-      label: "Name"
-      optional: true
-      max: 50
 
     creation_date:
       type: Date
