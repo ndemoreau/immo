@@ -46,13 +46,18 @@ Meteor.publish "allImages", ->
 
 # banks
 # Publish all
-Meteor.publish "allFsBanks", ->
-  FsBanks.find()
+Meteor.publish "allFsbanks", ->
+  Fsbanks.find()
 
 # transactions
 # Publish all
 Meteor.publish "allTransactions", ->
   Transactions.find()
+
+# invoices
+# Publish all
+Meteor.publish "allInvoices", ->
+  Invoices.find()
 
 # contacts
 # Publish all

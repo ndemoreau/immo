@@ -1,7 +1,6 @@
 {
   "packages": {
     "animate-css": {},
-    "blaze-layout": {},
     "subs-manager": {},
     "jade": {},
     "handlebar-helpers": {},
@@ -14,10 +13,15 @@
     "x-editable-bootstrap3": {},
     "bootstrap3-datepicker": {},
     "bootstrap3-wysihtml5": {},
-    "collectionFS": {},
-    "cfs-s3": {},
     "jquery-csv": {},
     "collection-hooks": {},
-    "xwidgets": {}
+    "xwidgets": {
+      "git": "https://github.com/ndemoreau/xwidgets.git"
+    },
+    "iron-router": {},
+    "mask": {},
+    "chosen-package-v1": {},
+    "collectionFS": {},
+    "cfs-s3": {}
   }
 }

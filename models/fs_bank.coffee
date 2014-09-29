@@ -4,22 +4,24 @@
 #  )]
 #)
 
-s3Store = new FS.Store.S3("fsBanks",
-  region: "eu-west-1"
-  accessKeyId: ->
-    Meteor.call(s3_key)
-  secretAccessKey: ->
-    Meteor.call(s3_secret)
+s3Store = new FS.Store.S3("fsbanks",
   bucket: "immondm" #required
+  path: "banks"
+
 )
 
-@FsBanks = new FS.Collection("fsBanks",
+#s3Store.on("stored", function (storeName, fileObj) {
+#  if (storeName !== "fsbanks")
+#    return
+#});
+
+@Fsbanks = new FS.Collection("fsbanks",
   stores: [s3Store]
 )
 
 FS.debug = true
 
-FsBanks.allow
+Fsbanks.allow
   insert: ->
     true
   update: ->

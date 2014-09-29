@@ -32,6 +32,7 @@ Router.map ->
       building: Buildings.findOne(@params._id)
       spaces: Spaces.find({building_id: @params._id})
       buildings: Buildings.find()
+      building_id: @params._id
 
 
   @route "buildingSpaceDashboards",

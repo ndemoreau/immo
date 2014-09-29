@@ -26,15 +26,15 @@ template(name="building")
                         .profile-info-row
                             .profile-info-name Creation time
                             .profile-info-value added #{created_on}
-                    .space-12
-                    .row
-                        .col-xs-12
-                            .tabbable
-                                ul.nav.nav-tabs
-                                    li#menu-spaces(class="{{isActive 'buildingSpaces'}}")
-                                        a(href="{{pathFor 'buildingSpaces'}}") #{nbr_spaces} Spaces
-                                    li#menu-dashboards(class="{{isActive 'buildingDashboards'}}")
-                                        a(href="{{pathFor 'buildingDashboards'}}") Dashboards
-                                .tab-content
-                                    +yield "subTemplate"
+        .space-12
+        .row
+            .col-xs-12
+                .tabbable
+                    ul.nav.nav-tabs
+                        li#menu-spaces(class="{{isActive 'buildingSpaces'}}")
+                            a(href="{{pathFor 'buildingSpaces'}}") #{nbr_spaces} Spaces
+                        li#menu-dashboards(class="{{isActive 'buildingDashboards'}}")
+                            a(href="{{pathFor 'buildingDashboards'}}") Dashboards
+                    .tab-content
+                        +yield "subTemplate"
 

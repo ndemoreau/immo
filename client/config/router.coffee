@@ -12,7 +12,8 @@ Router.configure
 Router.onBeforeAction "loading"
 Router.onBeforeAction ->
   $(".notification").remove()
-  return
+Router.onRun ->
+  Session.set("keyword_search","")
 
 Router.onAfterAction ->
   setTimeout( ->
@@ -29,15 +30,29 @@ Router.onAfterAction ->
           if error
             Notifications.error error.message
           Meteor.defer -> $(".editable[data-name=" + name + "]").data('editableContainer').formOptions.value = oldVal
-  ,500)
+    $(".iban").mask "AA00 0000 0000 0000"
+#    Session.set("previous_path",Router.current().path)
+    if $(".full-height-panel")[0]
+      set_full_height()
+      $(window).resize ->
+        console.log "resizing"
+        set_full_height()
+  ,0)
 
 
 @subs = new SubsManager()
 
 @getSubTemplate = (template,route) ->
   if route.ready()
+    routeArray = route.path.split("/")
+    if routeArray[route.length -1] = route.params._id
+      template = "tenants"
+    else
+      template = routeArray[route.length -1]
+    console.log "sub template: #{template}"
     route.render()
     templateName = template
     route.render templateName, to: 'subTemplate'
   else
     route.render 'loading'
+

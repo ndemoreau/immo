@@ -55,3 +55,8 @@ template(name="breadcrumb")
                                 a#newTenantButton(href="#")
                                     i.ace-icon.fa.fa-plus
                                     | New space
+        #nav-search.nav-search
+            +yield "filters"
+            span(class="input-icon input-icon-right")
+                input(autocomplete="off" class="input-small nav-search-input search-query" id="keyword-search" name="q" placeholder="Search..." type="text" value="{{keyword_search}}")
+                i.ace-icon.glyphicon.glyphicon-remove-circle.pointer#cancel-keyword-search

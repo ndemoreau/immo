@@ -37,10 +37,12 @@ Router.map ->
       space: Spaces.findOne(@params._id)
       building_spaces: Spaces.find({building_id: @params._building_id})
       current_tenant: Tenants.findOne({space_id: @params._id}, {sort: {"entry_date": -1}, limit : 1})
+      contacts: Contacts.find({},{sort:{"lastname": 1}})
+      space_id: @params._id
 
   @route "buildingSpaceTenant",
     path: "/buildings/:_building_id/spaces/:_space_id/tenants/:_id"
-    template: "tenant"
+    template: "space"
     action: -> getSubTemplate(Session.get("current_tenant_subtemplate"),this)
     waitOn: ->
       [subs.subscribe("allSpaces"),

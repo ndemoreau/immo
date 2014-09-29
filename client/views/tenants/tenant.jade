@@ -85,5 +85,7 @@ template(name="tenant")
                                 li#menu-dashboards(class="{{isActive 'tenantDashboards'}}")
                                     a(href="{{pathFor 'tenantDashboards'}}") Dashboards
                             .tab-content
-                                +yield "subTemplate"
+                                with ..
+                                    +yield "subTemplate"
 
+template(name="buildingSpaceTenant")

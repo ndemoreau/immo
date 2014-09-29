@@ -4,14 +4,9 @@
 #  )]
 #)
 
-s3Store = new FS.Store.S3("images",
-  region: "eu-west-1"
-  accessKeyId: ->
-    Meteor.call(s3_key)
-  secretAccessKey: ->
-    Meteor.call(s3_secret)
+s3Store = new FS.Store.S3 "images",
   bucket: "immondm" #required
-)
+
 
 @Images = new FS.Collection("images",
   stores: [s3Store]

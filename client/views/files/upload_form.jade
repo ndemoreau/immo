@@ -2,41 +2,22 @@ template(name="uploadForm")
     div#uploads
         h1 Upload your docs here
         input.myFileInput(type="file")
+    +imageList
 
-template(name="dropZone")
-    .drop-zone
-        |DROP HERE
-
-template(name="fsBankList")
-    each fsBanks
-        li
-            p Name: {{this.name}}
-            p Extension: {{this.extension}}
-            p Type: {{this.type}}
-            p Size: {{this.size}} kb
-            p Url: {{this.url}}
-            a(href="{{url}}" target="_blank") img(src="{{url}}" alt="{{_id}}")
-
-template(name="uploadForm2")
-    div#uploads
-        h1 Upload your docs here
-        div {{cfsFileInput fsBanksCollection class="myInputClass"}}
-        div
-            each fsBankss
-                if cfsIsUploading
-                    p {{cfsUploadProgressBar}}
-                        if uploadsArePaused
-                            |Paused!
-                        else
-                            |Uploading...
+template(name="imageList")
+    h3 Images list
+    ul
+        each images
+            li
+                unless this.isUploaded
+                    +FS.UploadProgressBar bootstrap=true
                 else
-                    h5 #{name}
-                    p {{cfsFormattedSize}}
-                    if url
-                        div
-                            a(href="{{url}}" target="_blank")
-                                img(src="{{url}}" alt="" class="thumbnail")
-                    if cfsIsDownloading
-                        |{{cfsDownloadProgressBar}}
-                    else
-                        |{{cfsDownloadButton class="btn btn-xs"}}
+                    p Name: {{this.name}}
+                    p Extension: {{this.extension}}
+                    p Type: {{this.type}}
+                    p Size: {{this.size}} kb
+                    p Url: {{this.url}}
+                    a(href="{{url}}" target="_blank") img(src="{{url}}" alt="{{_id}}")
+                    +FS.DeleteButton class="btn btn-danger btn-xs"
+                        |Delete me
+

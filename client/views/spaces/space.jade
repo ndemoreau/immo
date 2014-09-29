@@ -6,9 +6,10 @@ template(name="space")
                 small
                     i.ace-icon.fa.fa-angle-double-right
                     div(id="text" class="editable" data-type="text" data-pk="#{_id}" data-name="name" data-value="#{name}" data-context="Spaces") #{name}
-            a.btn.btn-info.pull-right(id="newSpaceButton")
-                i.ace-icon.fa.fa-plus
-                | New space
+            .btn-group.pull-right
+                a.btn.btn-info(id="newSpaceButton")
+                    i.ace-icon.fa.fa-plus
+                    | New space
         .clearfix
         .profile-user-info.profile-user-info-striped
             .profile-info-row
@@ -46,6 +47,7 @@ template(name="space")
                         li#menu-dashboards(class="{{isActive 'buildingSpaceTransactions'}}")
                             a(href="{{pathFor 'buildingSpaceTransactions' _building_id=building_id _id=_id}}") Transactions
                     .tab-content
-                        +yield "subTemplate"
+                        with ..
+                            +yield "subTemplate"
 
 

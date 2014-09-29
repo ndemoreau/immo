@@ -10,3 +10,6 @@ Template.spaces.events
   'click #newSpaceButton': ->
     $("#newSpace").modal("show")
 
+Template.spacesList.rendered = ->
+  console.log this.data
+

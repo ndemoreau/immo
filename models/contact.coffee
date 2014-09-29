@@ -37,9 +37,9 @@
       optional: false
       max: 50
 
-    phone:
+    mobile_phone:
       type: String
-      label: "Phone"
+      label: "Mobile Phone"
       optional: true
       max: 50
 
@@ -64,13 +64,27 @@
 
     birthday:
       type: Date
-      label: "Entry date"
+      label: "Birthday"
       optional: true
+
+    iban:
+      type: String
+      label: "IBAN"
+      optional: true
+      autoValue: ->
+        if this.value
+          this.value.replace(/\s/g, '')
+
 
     is_tenant:
       type: Boolean
       label: "Tenant"
       optional: true
+
+    open_transactions:
+      type: Number
+      label: "Open transactions"
+      defaultValue: 0
 
     creation_date:
       type: Date
@@ -95,8 +109,8 @@ Contacts.allow
 
 Contacts.helpers
   fullname: ->
-    participant = Participants.findOne(@participant_id)
-    participant.firstname + " " + participant.lastname
+    contact = Contacts.findOne(@_id)
+    contact.firstname + " " + contact.lastname
 
   subscription_date: ->
     moment(Date(@creation_date)).format "DD MMMM"
@@ -121,3 +135,6 @@ Meteor.methods
 #    }else{
 #      throw new Meteor.Error(403, 'You do not have the rights to delete this contact.')
 #    }
+
+  Contacts: (query)->
+    ({name: x.firstname, _id: x._id} for x in Contacts.find({}).fetch()) #use the query in the find

@@ -1,13 +1,7 @@
-Template.building.rendered = ->
+Template.space.rendered = ->
 
 
-Template.building.events
-  "click .delete": (e, instance) ->
-    building = this
-    e.preventDefault()
-    Meteor.call "removeBuilding", building, (error, result) ->
-      alert "building deleted."
-      Router.go "/buildings"
+Template.space.events
 
 
 

@@ -3,12 +3,12 @@ Router.map ->
     path: "/doctypes"
     waitOn: ->
       [subs.subscribe "allDoctypes",
-        subs.subscribe "allFsBanks"]
+        subs.subscribe "allImages"]
 
     data: ->
       doctypes: Doctypes.find()
-      fsBanks: FsBanks.find()
-      fsBanksCollection: FsBanks
+      images: Images.find()
+      ImagesCollection: Images
 
   @route "doctype",
     path: "/doctypes/:_id"

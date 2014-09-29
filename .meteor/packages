@@ -4,12 +4,11 @@
 # but you can also edit it by hand.
 
 standard-app-packages
-blaze-layout
+spacebars-compiler
 moment
 subs-manager
 jade
 simple-schema
-iron-router
 handlebar-helpers
 collection-helpers
 notifications
@@ -25,12 +24,16 @@ autoform
 x-editable-bootstrap3
 animate-css
 bootstrap3-datepicker
-spacebars-compiler
 bootstrap3-wysihtml5
-collectionFS
 cfs-filesystem
 cfs-s3
 insecure
 jquery-csv
 collection-hooks
 xwidgets
+iron-layout
+iron-router
+cfs-ui
+cfs-ejson-file
+mask
+chosen-package-v1

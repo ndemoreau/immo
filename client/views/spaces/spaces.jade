@@ -1,12 +1,13 @@
 template(name="spaces")
-    .page-header.position-relative
-        a.btn.btn-info.pull-right#newSpaceButton
-            i.ace-icon.fa.fa-plus
-            | New space
-        h1 {{total}} Spaces
-    .clearfix
-    +spacesList
-    +newSpace
+    .animated.fadeIn
+        .page-header.position-relative
+            a.btn.btn-info.pull-right#newSpaceButton
+                i.ace-icon.fa.fa-plus
+                | New space
+            h1 {{total}} Spaces
+        .clearfix
+        +spacesList
+        +newSpace
 
 
 template(name="buildingSpaces")
@@ -20,11 +21,12 @@ template(name="buildingSpaces")
 template(name="spacesList")
     .widgets
         .row
-            +each spaces
+            each spaces
                 .col-xs-12.col-sm-6
                     .widget-box.widget-color-purple
                         .widget-header
-                            a(href="{{pathFor 'buildingSpaceTenants' _building_id=this.building_id _id=this._id}}") #{name}
+                            h4
+                                a(href="{{pathFor 'buildingSpaceTenants' _building_id=this.building_id _id=this._id}}") #{name}
                         .widget-body
                             p Content here
 

@@ -15,11 +15,8 @@ Schemas.Tenant = new SimpleSchema
 
   contact_id:
     type: String
-    label: "Name"
-    optional: true
+    label: "Contact"
     max: 50
-    autoValue: ->
-      console.log "autovalue contact_id"
 
   entry_date:
     type: Date
@@ -37,12 +34,14 @@ Schemas.Tenant = new SimpleSchema
 
   rent:
     type: Number
+    decimal: true
     label: "Rent by month"
     optional: true
 
 
   charges:
     type: Number
+    decimal: true
     label: "Charges by month"
     optional: true
     defaultValue: ->

@@ -1,6 +1,6 @@
 @Bkimports = new Meteor.Collection("bkimports",
   schema:
-    account_number:
+    account_nbr:
       type: String
       label: "IBAN Account"
       max: 50

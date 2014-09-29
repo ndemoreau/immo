@@ -1,6 +1,6 @@
 @Transactions = new Meteor.Collection("transactions",
   schema:
-    account_number:
+    account_nbr:
       type: String
       label: "IBAN Account"
       max: 50
@@ -8,6 +8,7 @@
     entry_nbr:
       type: Number
       label: "Entry Nbr"
+      optional: true
 
     value_date:
       type: Date
@@ -15,6 +16,7 @@
 
     amount:
       type: Number
+      decimal: true
       label: "Amount"
 
     description:
@@ -28,11 +30,29 @@
       label: "matching_id"
       optional: true
 
+    contact_id:
+      type: String
+      label: "contact_id"
+      optional: true
+
+    status:
+      type: String
+      label: "Status"
+      defaultValue: "Open"
+
 
     creation_date:
       type: Date
       label: "Creation date"
-      defaultValue: new Date()
+      autoValue: () ->
+        if @isInsert
+          new Date()
+        else
+          if @isUpsert
+            $setOnInsert: new Date
+          else
+            this.unset()
+
 
 )
 
@@ -52,22 +72,53 @@
 
 # Methods
 Meteor.methods
-  createTransaction: (transaction) ->
 
-    #    if(can.createTransaction(Meteor.transaction()))
-    p = transaction
-    p["creation_date"] = new Date()
-    id = Transactions.insert(p)
-    return id
-
+  importTransactions: (file) ->
+    reader = new FileReader
+    console.log file
+    reader.readAsText file
+    reader.onload = (event) ->
+      data = $.csv.toObjects(event.target.result)
+      console.log "File read #{data}"
+      _.map data, (transaction) ->
+        console.log transaction
+        t = {}
+        selectValues = {}
+        date = transaction["Value date"]
+        date_array = date.split("/")
+        new_date = date_array[2] + "-" + date_array[1] + "-" + date_array[0]
+        #          console.log new_date
+        selectValues["account_nbr"] = transaction["Account number"]
+        selectValues["value_date"] = new Date new_date
+        selectValues["entry_nbr"] = parseInt transaction["Entry Number"]
+        t["amount"] = transaction["Amount in the currency of the account"].replace(/\s/g, '')
+        #          console.log t["amount"]
+        t["description"] = transaction["Description"]
+        Meteor.call "createTransaction", t, selectValues, (error, entry_nbr) ->
+          if error
+            console.log error
+          else
+            console.log id
+  updateTransaction: (id, values, action) ->
+    console.log "updating"
+    if action == "assignContact"
+      values["status"] = "contact"
+      Contacts.update values.contact_id, {$inc: {open_transactions: 1}}
+    if action == "removeContact"
+      values["status"] = "open"
+      Contacts.update values.contact_id, {$inc: {open_transactions: -1}}
+    Transactions.update id,
+      $set: values
+    , (e, r) ->
+      if Meteor.isClient
+        console.log "Client!"
+        if e
+          Notifications.error e
+        else
+          Notifications.success 'Transaction updated!'
   removeTransaction: (transaction) ->
 
     #    if(can.removeTransaction(Meteor.transaction(), transaction)){
     #      console.log("removing transaction" + transaction._id);
     Transactions.remove transaction._id
     return
-
-
-#    }else{
-#      throw new Meteor.Error(403, 'You do not have the rights to delete this transaction.')
-#    }

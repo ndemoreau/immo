@@ -26,10 +26,10 @@ AutoForm.hooks
           $('#newTenant').modal('hide')
           tenant = Tenants.findOne(result)
           Notifications.success 'New tenant created: ' + tenant.firstname + " " + tenant.lastname
-        else
-          Notifications.alert error
-        $("#newTenant").addClass("hidden")
-        $("#tenantsList").removeClass("hidden")
+          $("#newTenant").addClass("hidden")
+          $("#tenantsList").removeClass("hidden")
+        else if not error.invalidKeys
+          Notifications.error error
 
   insertDoctypeForm:
     after:
@@ -37,7 +37,7 @@ AutoForm.hooks
         unless result is false
           doctype = Doctypes.findOne(result)
           Notifications.success 'New Document template created: ' + doctype.name
-        else
+        else if not error.invalidKeys
           Notifications.alert error
         Router.go("doctypes")
       update: (error, result, template) ->
@@ -46,7 +46,7 @@ AutoForm.hooks
           doctype = Doctypes.findOne(Router.current().params._id)
           Notifications.success 'Document template updated: ' + doctype.name
         else
-          Notifications.alert error
+          Notifications.error error
         Router.go("doctypes")
 
 
@@ -56,17 +56,20 @@ AutoForm.hooks
         unless result is false
           contact = Contacts.findOne(result)
           if Router.current().route.name == "buildingSpaceTenants"
-            $("#contact_id").val(contact._id)
+            $("[name=contact_id] option[value='#{contact._id}']").attr("selected", "selected")
+            $('.chosen-select').trigger 'chosen:updated'
+            $('.chosen-single span').html(contact.firstname + " " +contact.lastname)
           Notifications.success 'New Contact created: ' + contact.lastname
-        else
-          Notifications.alert error
-        $('#newContact').modal('hide')
+          this.resetForm();
+          $('#newContact').modal('hide')
+        else if not error.invalidKeys
+          Notifications.error error
       update: (error, result, template) ->
         unless result is false
           contact = Contacts.findOne(Router.current().params._id)
           Notifications.success 'Contact updated: ' + contact.lastname
         else
-          Notifications.alert error
+          Notifications.error error
 
 
 Meteor.startup ->
